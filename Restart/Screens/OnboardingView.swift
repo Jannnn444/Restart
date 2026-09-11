@@ -69,8 +69,31 @@ struct OnboardingView: View {
                         .fill(Color.white.opacity(0.2))
                         .padding(8)
                     // 2. CALL-TO-ACTION (STATIC)
-                    // 3. CAPSULE (DYNAMIC WIDTH)
+                    
+                    // 3. CAPSULE RED PART (DYNAMIC WIDTH)
+                    HStack{
+                        Capsule()
+                            .fill(Color("ColorRed"))
+                            .frame(width: 80)
+                        
+                        Spacer()
+                    }
+                    
                     // 4. CIRCLE (DRAGGABLE)
+                    HStack {
+                    ZStack {
+                        Circle()
+                            .fill(Color("ColorRed"))
+                        Circle()
+                            .fill(.black.opacity(0.15))
+                            .padding(8) // 8 is smaller than the default padding area
+                        Image(systemName: "chevron.right.2")
+                            .font(.system(size: 24, weight: .bold))
+                    } // ZSTACK
+                    .foregroundColor(.white)
+                    .frame(width: 80, height: 80, alignment: .center)
+                        Spacer() // right side push to left when its hstack
+                    } // HSTACK
                     
                 } //: FOOTER
                 .frame(height: 80, alignment: .center)

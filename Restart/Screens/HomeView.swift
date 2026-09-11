@@ -15,10 +15,16 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing:20) {
             // MARK: - HEADER
-            Image("character-2")
-                .resizable()
-                .scaledToFit()
-                .padding()
+            
+            ZStack {
+                CircleGroupView(ShapeColor: .gray, ShapeOpacity: 0.1)
+                
+                Image("character-2")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+            }
+    
             
             // MARK: - CENTER
             
@@ -44,12 +50,11 @@ struct HomeView: View {
                     .font(.system(.title3, design: .rounded))
                     .fontWeight(.bold)
             } //: BUTTON (old way vs glass effect)
-            .padding()
-            .glassEffect() //new
-
-//            .buttonStyle(.borderedProminent)
-//            .buttonBorderShape(.capsule)
-//            .controlSize(.large)
+//            .padding()
+//            .glassEffect() //new
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .controlSize(.large)
             
         } // :VSTACK
     }

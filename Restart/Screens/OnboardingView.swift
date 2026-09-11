@@ -74,7 +74,7 @@ struct OnboardingView: View {
                     
                 } //: FOOTER
                 .frame(height: 80, alignment: .center)
-                
+                .padding() //*
             } //: VSTACK
         } //: ZSTACK
     }

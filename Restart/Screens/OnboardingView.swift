@@ -63,11 +63,12 @@ struct OnboardingView: View {
                                     if abs(imageOffset.width) <= 150 {
                                         imageOffset = gesture.translation
                                     } //withouat abs()-> if imageOffset.width <= 150 && imageOffset.width >= -150 {
-                            }//: GESTURE
+                                }
                                 .onEnded { _ in
                                     imageOffset = .zero
                                 }
-                        )
+                        ) //: GESTURE
+                        .animation(.easeOut(duration: 1), value: imageOffset)
                 } //: CENTER (OVERLAY)
                 .overlay(
                     Image(systemName: "arrow.left.and.right.circle")
@@ -123,7 +124,7 @@ struct OnboardingView: View {
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80, alignment: .center)
                         .offset(x: buttonOffset)
-//                        .onTapGesture {<#code#>}
+                        //                        .onTapGesture {<#code#>}
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
@@ -132,7 +133,7 @@ struct OnboardingView: View {
                                     }
                                 }
                                 .onEnded { _ in
-                                    withAnimation(Animation.easeOut(duration: 4)) { 
+                                    withAnimation(Animation.easeOut(duration: 4)) {
                                         if buttonOffset > buttonWidth / 2 {
                                             buttonOffset = buttonWidth - 80  // futher then 2/1 button, automatically full
                                             isOnboardingViewActive = false // swipe to home

@@ -92,7 +92,7 @@ struct OnboardingView: View {
                                 .padding(8) // 8 is smaller than the default padding area
                             Image(systemName: "chevron.right.2")
                                 .font(.system(size: 24, weight: .bold))
-                        } // ZSTACK
+                        } // ZSTACK for the red button
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80, alignment: .center)
                         .offset(x: buttonOffset)
@@ -104,7 +104,10 @@ struct OnboardingView: View {
                                         buttonOffset = gesture.translation.width
                                     }
                                 }
-                        ) //: GESTURE: 1.start of drag 2. end of drag gesture (width for left and right)
+                                .onEnded { _ in
+                                    buttonOffset = 0 //when finished drag, button go back
+                                }
+                        ) //: GESTURE: 1.start of drag (onChanged) 2. end of drag gesture (onEnd) (width: left&right)
                         
                         Spacer() // right side push to left when its hstack
                         

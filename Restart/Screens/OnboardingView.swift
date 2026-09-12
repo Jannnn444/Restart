@@ -60,8 +60,13 @@ struct OnboardingView: View {
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
-                                imageOffset = gesture.translation
+                                    if abs(imageOffset.width) <= 150 {
+                                        imageOffset = gesture.translation
+                                    } //withouat abs()-> if imageOffset.width <= 150 && imageOffset.width >= -150 {
                             }//: GESTURE
+                                .onEnded { _ in
+                                    imageOffset = .zero
+                                }
                         )
                 } //: CENTER (OVERLAY)
                 .overlay(

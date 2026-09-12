@@ -73,11 +73,11 @@ struct OnboardingView: View {
                         .foregroundColor(.white)
                         .offset(x: 28)
                     
-                    // 3. CAPSULE RED PART (DYNAMIC WIDTH)
+                    // 3. CAPSULE RED PART ('DYNAMIC' WIDTH)
                     HStack{
                         Capsule()
                             .fill(Color("ColorRed"))
-                            .frame(width: 80)
+                            .frame(width: buttonOffset + 80) // cuz offset is 0, we need to add screen paddings
                         
                         Spacer()
                     }

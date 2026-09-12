@@ -105,7 +105,13 @@ struct OnboardingView: View {
                                     }
                                 }
                                 .onEnded { _ in
-                                    buttonOffset = 0 //when finished drag, button go back
+                                    if buttonOffset > buttonWidth / 2 {
+                                        buttonOffset = buttonWidth - 80  // futher then 2/1 button, automatically full
+                                        isOnboardingViewActive = false // swipe to home
+                                    } else {
+                                        buttonOffset = 0 //when finished drag, button go back
+                                        // page no changed, when u didnt swipe further to the half of the button
+                                    }
                                 }
                         ) //: GESTURE: 1.start of drag (onChanged) 2. end of drag gesture (onEnd) (width: left&right)
                         

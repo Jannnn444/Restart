@@ -95,16 +95,23 @@ struct OnboardingView: View {
                         } // ZSTACK
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80, alignment: .center)
-                        .onTapGesture {
-                            isOnboardingViewActive = false
-                        }
+                        .offset(x: buttonOffset)
+//                        .onTapGesture {<#code#>}
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    if gesture.translation.width > 0 {
+                                        buttonOffset = gesture.translation.width
+                                    }
+                                }
+                        ) //: GESTURE: 1.start of drag 2. end of drag gesture (width for left and right)
                         
                         Spacer() // right side push to left when its hstack
                         
                     } // HSTACK
                     
                 } //: FOOTER
-                .frame(height: buttonWidth, alignment: .center)
+                .frame(width: buttonWidth, height: 80, alignment: .center) //here frame the button length
                 .padding() //*
             } //: VSTACK
         } //: ZSTACK

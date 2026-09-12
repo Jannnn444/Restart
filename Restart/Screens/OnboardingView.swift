@@ -10,6 +10,10 @@ import SwiftUI
 struct OnboardingView: View {
     // MARK: - PROPERTY
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
+    @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
+    @State private var buttonOffset: CGFloat = 0
+    
+    
     // MARK: - BODY
     var body: some View {
         ZStack {
@@ -100,7 +104,7 @@ struct OnboardingView: View {
                     } // HSTACK
                     
                 } //: FOOTER
-                .frame(height: 80, alignment: .center)
+                .frame(height: buttonWidth, alignment: .center)
                 .padding() //*
             } //: VSTACK
         } //: ZSTACK

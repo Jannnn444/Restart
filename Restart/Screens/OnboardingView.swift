@@ -42,7 +42,7 @@ struct OnboardingView: View {
                     .padding(.horizontal, 10)
                 } //: HEADER
                 .opacity(isAnimating ? 1 : 0) // ternary operator -> (coondition ? true : false)
-                .offset(y: isAnimating ? 0 : -40)
+                .offset(y: isAnimating ? 0 : -40) // y for height of this vstack, animate look like dropping
                 .animation(.easeOut(duration: 1), value: isAnimating)
                 
                 // MARK: - CENTER
@@ -53,6 +53,8 @@ struct OnboardingView: View {
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
+                        .opacity(isAnimating ? 1 : 0)
+                        .animation(.easeOut(duration: 0.5), value: isAnimating)
                 } //: CENTER
                 
                 Spacer()

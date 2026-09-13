@@ -14,6 +14,7 @@ struct OnboardingView: View {
     @State private var buttonOffset: CGFloat = 0
     @State private var isAnimating: Bool = false
     @State private var imageOffset: CGSize = .zero /*CGSize(width: 0, height: 0)*/
+    @State private var indicatorOpacity: Double = 1.0
     
     // MARK: - BODY
     var body: some View {
@@ -50,6 +51,9 @@ struct OnboardingView: View {
                 
                 ZStack {
                     CircleGroupView(ShapeColor: .white, ShapeOpacity: 0.2)
+                        .offset(x: imageOffset.width * -1) // ring run oposite direction
+                        .blur(radius: abs(imageOffset.width / 5)) // dynamic offset figures and more the offset is, more blurry will be.
+                        .animation(.easeOut(duration: 1), value: imageOffset)
                     
                     Image("character-1")
                         .resizable()
@@ -63,10 +67,20 @@ struct OnboardingView: View {
                                 .onChanged { gesture in
                                     if abs(imageOffset.width) <= 150 {
                                         imageOffset = gesture.translation
+                                        
+                                        withAnimation(.linear(duration: 0.25)) {
+                                            indicatorOpacity = 0 //when drag happen indicator hid
+                                        }
+                                        
                                     } //withouat abs()-> if imageOffset.width <= 150 && imageOffset.width >= -150 {
                                 }
                                 .onEnded { _ in
                                     imageOffset = .zero
+                                    
+                                    withAnimation(.linear(duration: 0.25)) {
+                                        indicatorOpacity = 1 //when end gesture it show
+                                    }
+                                    
                                 }
                         ) //: GESTURE
                         .animation(.easeOut(duration: 1), value: imageOffset)
@@ -78,6 +92,7 @@ struct OnboardingView: View {
                         .offset(y: 20)
                         .opacity(isAnimating ? 1 : 0)
                         .animation(.easeOut(duration: 1).delay(2), value: isAnimating)
+                        .opacity(indicatorOpacity) //order matters
                     ,alignment: .bottom
                 )
                 

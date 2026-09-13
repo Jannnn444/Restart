@@ -156,6 +156,9 @@ struct OnboardingView: View {
                                 .onEnded { _ in
                                     withAnimation(Animation.easeOut(duration: 4)) {
                                         if buttonOffset > buttonWidth / 2 {
+                                            
+                                            playSound(sound: "chimup", type: "mp3")
+                                            
                                             buttonOffset = buttonWidth - 80  // futher then 2/1 button, automatically full
                                             isOnboardingViewActive = false // swipe to home
                                         } else {

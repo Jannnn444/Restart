@@ -17,6 +17,8 @@ struct OnboardingView: View {
     @State private var indicatorOpacity: Double = 1.0
     @State private var textTitle: String = "Share."
     
+    let hapticFeedback = UINotificationFeedbackGenerator()
+    
     // MARK: - BODY
     var body: some View {
         ZStack {
@@ -156,12 +158,13 @@ struct OnboardingView: View {
                                 .onEnded { _ in
                                     withAnimation(Animation.easeOut(duration: 4)) {
                                         if buttonOffset > buttonWidth / 2 {
-                                            
+                                            hapticFeedback.notificationOccurred(.success)
                                             playSound(sound: "chimup", type: "mp3")
                                             
                                             buttonOffset = buttonWidth - 80  // futher then 2/1 button, automatically full
                                             isOnboardingViewActive = false // swipe to home
                                         } else {
+                                            hapticFeedback.notificationOccurred(.warning)
                                             buttonOffset = 0 //when finished drag, button go back
                                             // page no changed, when u didnt swipe further to the half of the button
                                         }

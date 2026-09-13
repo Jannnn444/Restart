@@ -15,6 +15,7 @@ struct OnboardingView: View {
     @State private var isAnimating: Bool = false
     @State private var imageOffset: CGSize = .zero /*CGSize(width: 0, height: 0)*/
     @State private var indicatorOpacity: Double = 1.0
+    @State private var textTitle: String = "Share."
     
     // MARK: - BODY
     var body: some View {
@@ -28,10 +29,11 @@ struct OnboardingView: View {
                 Spacer()
                 
                 VStack(spacing: 0) {
-                    Text("Share.")
+                    Text(textTitle)
                         .font(.system(size: 60))
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
+                        .transition(.opacity)
                     
                     Text("""
                     It's not how much we give but
@@ -65,11 +67,12 @@ struct OnboardingView: View {
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
-                                    if abs(imageOffset.width) <= 150 {
+                                    if abs(imageOffset.width) <= 150 { //allow to move inside screen scope
                                         imageOffset = gesture.translation
                                         
                                         withAnimation(.linear(duration: 0.25)) {
                                             indicatorOpacity = 0 //when drag happen indicator hid
+                                            textTitle = "Give."
                                         }
                                         
                                     } //withouat abs()-> if imageOffset.width <= 150 && imageOffset.width >= -150 {
@@ -79,6 +82,7 @@ struct OnboardingView: View {
                                     
                                     withAnimation(.linear(duration: 0.25)) {
                                         indicatorOpacity = 1 //when end gesture it show
+                                        textTitle = "Share."
                                     }
                                     
                                 }

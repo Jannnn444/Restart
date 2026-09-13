@@ -34,6 +34,7 @@ struct OnboardingView: View {
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
                         .transition(.opacity)
+                        .id(textTitle) // ID method to tell SwiftUI a view is no longer same , makes the delay fixed
                     
                     Text("""
                     It's not how much we give but
@@ -181,6 +182,7 @@ struct OnboardingView: View {
             isAnimating = true
             // when this view APPEARS on scren and this value triggers the animation ISANIMATED immediatly
         })
+        .preferredColorScheme(.dark) //set the style bar by preferred color scheme
     }
 }
 

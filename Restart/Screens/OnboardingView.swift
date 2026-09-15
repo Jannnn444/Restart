@@ -16,8 +16,16 @@ struct OnboardingView: View {
     @State private var imageOffset: CGSize = .zero /*CGSize(width: 0, height: 0)*/
     @State private var indicatorOpacity: Double = 1.0
     @State private var textTitle: String = "Share."
-    
+
     let hapticFeedback = UINotificationFeedbackGenerator()
+    
+    
+    var userBob = User(name: "Bob", age: 40)
+    func test() {
+        var newJan = TextCompressor(text: "asdasd")
+        newJan.compress()
+    }
+
     
     // MARK: - BODY
     var body: some View {
@@ -65,7 +73,7 @@ struct OnboardingView: View {
                         .scaledToFit()
                         .opacity(isAnimating ? 1 : 0)
                         .animation(.easeOut(duration: 0.5), value: isAnimating)
-                        .offset(x: imageOffset.width * 1.2, y: 0) //x left&right
+                        .offset(x: imageOffset.width * 1.2, y: 0) //x : allows horizontal-only movement
                         .rotationEffect(.degrees(Double(imageOffset.width / 20)))
                         .gesture(
                             DragGesture()
@@ -76,6 +84,7 @@ struct OnboardingView: View {
                                         withAnimation(.linear(duration: 0.25)) {
                                             indicatorOpacity = 0 //when drag happen indicator hid
                                             textTitle = "Give."
+//                                            userBob.showMyIDCard()
                                         }
                                         
                                     } //withouat abs()-> if imageOffset.width <= 150 && imageOffset.width >= -150 {
@@ -159,7 +168,7 @@ struct OnboardingView: View {
                                     withAnimation(Animation.easeOut(duration: 4)) {
                                         if buttonOffset > buttonWidth / 2 {
                                             hapticFeedback.notificationOccurred(.success)
-                                            playSound(sound: "chimup", type: "mp3")
+                                            playSound(sound: "chimeup", type: "mp3")
                                             
                                             buttonOffset = buttonWidth - 80  // futher then 2/1 button, automatically full
                                             isOnboardingViewActive = false // swipe to home
@@ -196,3 +205,34 @@ struct OnboardingView: View {
 #Preview {
     OnboardingView()
 }
+
+struct TextCompressor {
+    var text: String
+    
+    mutating func compress() {
+        text = text + " "
+    }
+}
+
+var test = 5
+
+func sum() {
+    var test2 = 3
+}
+
+struct User {
+    var name: String
+    var age: Int
+    
+    func showMyIDCard() {
+        print("""
+    Here is ID info
+    Name \(name) 
+    Age \(age)
+
+    """)
+    }
+}
+
+var jan = User(name: "jan", age: 12)
+
